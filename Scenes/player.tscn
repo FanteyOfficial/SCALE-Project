@@ -153,6 +153,6 @@ shape = SubResource("RectangleShape2D_f40u0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vkano")
-animation = &"dashRight"
+animation = &"idle"
 
 [node name="Dash" parent="." instance=ExtResource("3_wvwvc")]
