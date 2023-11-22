@@ -1,7 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://b13v1unf0jvj0"]
+[gd_scene load_steps=7 format=3 uid="uid://b13v1unf0jvj0"]
 
 [ext_resource type="PackedScene" uid="uid://biinmccay4ppq" path="res://Scenes/player.tscn" id="1_kof1k"]
 [ext_resource type="PackedScene" uid="uid://xb7sh2qggrli" path="res://Scenes/er_pesce.tscn" id="2_yxcrn"]
+
+[sub_resource type="GDScript" id="GDScript_av6ib"]
+script/source = "extends Node2D
+
+@onready var pesce = get_node(\"ErPesce\")
+@onready var player = get_node(\"Player\")
+
+#func _ready():
+#	pesce.set_player(player)
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghkdr"]
 size = Vector2(1152, 128)
@@ -13,13 +23,14 @@ size = Vector2(64, 456)
 size = Vector2(64, 456)
 
 [node name="World" type="Node2D"]
+script = SubResource("GDScript_av6ib")
 
 [node name="Player" parent="." instance=ExtResource("1_kof1k")]
 position = Vector2(64, 496)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(48, -24)
-zoom = Vector2(3, 3)
+position = Vector2(0, -80)
+zoom = Vector2(2, 2)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
