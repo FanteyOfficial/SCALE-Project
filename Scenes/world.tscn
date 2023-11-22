@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b13v1unf0jvj0"]
+[gd_scene load_steps=6 format=3 uid="uid://b13v1unf0jvj0"]
 
 [ext_resource type="PackedScene" uid="uid://biinmccay4ppq" path="res://Scenes/player.tscn" id="1_kof1k"]
+[ext_resource type="PackedScene" uid="uid://xb7sh2qggrli" path="res://Scenes/er_pesce.tscn" id="2_yxcrn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghkdr"]
 size = Vector2(1152, 128)
@@ -38,3 +39,6 @@ shape = SubResource("RectangleShape2D_txukq")
 offset_top = 520.0
 offset_right = 1152.0
 offset_bottom = 648.0
+
+[node name="ErPesce" parent="." instance=ExtResource("2_yxcrn")]
+position = Vector2(880, 488)
