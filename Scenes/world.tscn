@@ -1,17 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b13v1unf0jvj0"]
+[gd_scene load_steps=8 format=3 uid="uid://b13v1unf0jvj0"]
 
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_cdr8q"]
 [ext_resource type="PackedScene" uid="uid://biinmccay4ppq" path="res://Scenes/player.tscn" id="1_kof1k"]
 [ext_resource type="PackedScene" uid="uid://xb7sh2qggrli" path="res://Scenes/er_pesce.tscn" id="2_yxcrn"]
-
-[sub_resource type="GDScript" id="GDScript_av6ib"]
-script/source = "extends Node2D
-
-@onready var pesce = get_node(\"ErPesce\")
-@onready var player = get_node(\"Player\")
-
-#func _ready():
-#	pesce.set_player(player)
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghkdr"]
 size = Vector2(1152, 128)
@@ -22,8 +13,14 @@ size = Vector2(64, 456)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txukq"]
 size = Vector2(64, 456)
 
+[sub_resource type="Curve2D" id="Curve2D_7h7g1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 24, 520, 0, 0, 0, 0, 568, 520, 0, 0, 0, 0, 1096, 520)
+}
+point_count = 3
+
 [node name="World" type="Node2D"]
-script = SubResource("GDScript_av6ib")
+script = ExtResource("1_cdr8q")
 
 [node name="Player" parent="." instance=ExtResource("1_kof1k")]
 position = Vector2(64, 496)
@@ -51,5 +48,20 @@ offset_top = 520.0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="ErPesce" parent="." instance=ExtResource("2_yxcrn")]
-position = Vector2(880, 488)
+[node name="SpawnPath" type="Path2D" parent="."]
+position = Vector2(0, 16)
+curve = SubResource("Curve2D_7h7g1")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(24, 520)
+
+[node name="area_attack" type="Timer" parent="."]
+
+[node name="aoe_duration" type="Timer" parent="."]
+
+[node name="ErPesce" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_yxcrn")]
+position = Vector2(920, 488)
+player = NodePath("../Player")
+
+[connection signal="timeout" from="area_attack" to="." method="_on_area_attack_timeout"]
+[connection signal="timeout" from="aoe_duration" to="." method="_on_aoe_duration_timeout"]
