@@ -32,6 +32,7 @@ func _physics_process(delta):
 		attack_timer.start(5)
 		set_physics_process(false)
 	move_and_slide()
+	$AnimatedSprite2D.play("Fish")
 
 func get_phase():
 	return phase_1
