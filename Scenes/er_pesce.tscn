@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://xb7sh2qggrli"]
+[gd_scene load_steps=10 format=3 uid="uid://xb7sh2qggrli"]
 
 [ext_resource type="Script" path="res://Scripts/er_pesce.gd" id="1_uvnb7"]
 [ext_resource type="Texture2D" uid="uid://c66fufhc8jxie" path="res://Sprites/erpesce2.png" id="2_11g1o"]
 [ext_resource type="Texture2D" uid="uid://delevo5q5oenl" path="res://Sprites/Fish/fish.png" id="3_5f6q8"]
+[ext_resource type="Script" path="res://Scripts/RigidBody2D.gd" id="4_ha5up"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od67b"]
 size = Vector2(160, 64)
@@ -29,11 +30,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8gmb"]
+size = Vector2(53.8593, 106.78)
+
 [node name="ErPesce" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_uvnb7")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_od67b")
 
 [node name="Erpesce2" type="Sprite2D" parent="Hitbox"]
@@ -47,3 +52,11 @@ scale = Vector2(0.41579, 0.379518)
 sprite_frames = SubResource("SpriteFrames_bipuj")
 animation = &"Fish"
 frame_progress = 0.860164
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." groups=["Hit"]]
+script = ExtResource("4_ha5up")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0.500002, 0.499998)
+scale = Vector2(2.915, 0.59)
+shape = SubResource("RectangleShape2D_e8gmb")

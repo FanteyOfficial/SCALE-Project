@@ -39,7 +39,23 @@ func _physics_process(delta):
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
-
+	
 	move_and_slide()
 	player_animations()
 
+func _process(delta):
+	if Input.is_mouse_button_pressed(1):
+		$Area2D/CollisionShape2D_right.disabled = false
+		$AnimatedSprite2D.play("attackRight")
+	elif Input.is_mouse_button_pressed(1) and Input.is_action_pressed("ui_left"):
+		$Area2D/CollisionShape2D_left.disabled = false
+		$AnimatedSprite2D.play("attackLeft")
+	else:
+		$Area2D/CollisionShape2D_right.disabled = true
+		$Area2D/CollisionShape2D_left.disabled = true
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("Hit"):
+		body.take_damage()
+	else:
+		pass
